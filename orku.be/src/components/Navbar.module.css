@@ -1,8 +1,9 @@
+/* Navbar Container */
 .navbar {
   width: 82%;
   margin: 0.5rem auto;
   padding: 0.3rem 0.6rem;
-  background-color: rgba(23, 63, 82, 0.4);
+  background-color: rgba(23, 63, 82, 0.1);
   border-radius: 30px;
   position: fixed;
   top: 5px;
@@ -18,10 +19,44 @@
   transform: translateY(-20px);
 }
 
+/* Navbar appears on scroll */
 .navbar.scrolled {
   opacity: 1;
   transform: translateY(0);
-  background-color: rgba(23, 63, 82, 0.4);
+  background-color: rgba(23, 63, 82, 0.3);
+}
+
+/* Logo Container */
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Texte "Own Your Energy" */
+.logoText {
+  font-size: 0.9rem;
+  font-family: 'Karla', sans-serif;
+  font-weight: 400;
+  color: #EE7042 !important;
+  /* Assurer la bonne couleur */
+  background-color: transparent !important;
+  /* Éviter toute influence du fond */
+  opacity: 0;
+  /* Caché au départ */
+  transform: translateY(-5px);
+  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+  z-index: 1000;
+  /* S'assurer qu'il passe au-dessus du fond */
+  position: relative;
+  /* Éviter qu’il soit influencé par d'autres éléments */
+}
+
+/* Affichage du texte lorsqu'on scroll */
+.showText {
+  opacity: 1;
+  transform: translateY(0);
+  color: #EE7042 !important;
 }
 
 /* Navigation Links */
@@ -100,18 +135,4 @@
     font-size: 1rem;
     text-align: center;
   }
-}
-.logoText {
-  font-size: 0.9rem;
-  font-family: 'Karla', sans-serif;
-  font-weight: 300;
-  /* Plus léger au lieu de bold */
-  opacity: 0;
-  transition: opacity 0.6s ease-in-out, transform 0.3s ease-in-out;
-}
-
-/* Ajout de l'animation douce */
-.navbar .logoText {
-  opacity: 1;
-  transform: translateY(0);
 }

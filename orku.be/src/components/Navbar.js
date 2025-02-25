@@ -3,18 +3,18 @@ import { motion } from "framer-motion";
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import { FiMenu, FiX } from "react-icons/fi"; // Icons for the mobile menu
+import { FiMenu, FiX } from "react-icons/fi";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Mobile menu state
-  const [showText, setShowText] = useState(false); // Show "Own Your Energy" on scroll
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showText, setShowText] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      setShowText(window.scrollY > 100); // Afficher le texte après 100px de scroll
+      setShowText(window.scrollY > 100);
 
       const sections = document.querySelectorAll("section");
       let currentSection = "";
@@ -36,14 +36,16 @@ export default function Navbar() {
     <motion.nav
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: isScrolled ? 1 : 0, y: isScrolled ? 0 : -20 }}
-      transition={{ duration: 1.2 }}
+      transition={{ duration: 0.7 }}
       className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}
     >
       {/* Logo Section */}
-      <motion.div className={styles.logoContainer}>
+      <motion.div
+        className={styles.logoContainer}
+        whileHover={{ scale: 1.2 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+      >
         <Image src="/logo-short.png" alt="Orku Logo" width={50} height={50} />
-
-        {/* Show "Own Your Energy" when scrolled */}
         <motion.div
           className={`${styles.logoText} ${showText ? styles.showText : ""}`}
           style={{ position: "relative", zIndex: 1000 }}
@@ -53,24 +55,31 @@ export default function Navbar() {
       </motion.div>
 
       {/* Desktop Navigation */}
-      <ul className={`${styles.navLinks} ${isMenuOpen ? styles.open : ""}`}>
+      <ul className={styles.navLinks}>
         {["accueil", "services", "valeurs", "partenaires", "contact"].map((section) => (
           <li key={section}>
-            <Link
-              href={`#${section}`}
-              className={activeSection === section ? styles.active : styles.navLink}
-              onClick={() => setIsMenuOpen(false)} // Close menu when a link is clicked
-            >
+            <Link href={`#${section}`} className={activeSection === section ? styles.active : styles.navLink}>
               {section.charAt(0).toUpperCase() + section.slice(1)}
             </Link>
           </li>
         ))}
       </ul>
 
-      {/* Mobile Menu Button */}
+      {/* Mobile Menu */}
       <button className={styles.menuButton} onClick={() => setIsMenuOpen(!isMenuOpen)}>
         {isMenuOpen ? <FiX size={28} color="#fff" /> : <FiMenu size={28} color="#fff" />}
       </button>
+
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <div className={styles.mobileMenu}>
+          {["accueil", "services", "valeurs", "partenaires", "contact"].map((section) => (
+            <Link key={section} href={`#${section}`} onClick={() => setIsMenuOpen(false)}>
+              {section.charAt(0).toUpperCase() + section.slice(1)}
+            </Link>
+          ))}
+        </div>
+      )}
     </motion.nav>
   );
 }

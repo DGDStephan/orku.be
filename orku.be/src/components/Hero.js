@@ -28,7 +28,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.8 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
+          transition={{ duration: 1.6, ease: "easeOut" }}
           className={styles.heroLogoContainer}
           style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}
         >
@@ -41,7 +41,7 @@ export default function Hero() {
           <motion.h1
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.8 }}
-            transition={{ duration: 2.2, delay: 0.6, ease: "easeOut" }}
+            transition={{ duration: 1.3, delay: 0.3, ease: "easeOut" }}
             className={styles.heroText}
             style={{ color: "white", marginTop: "-40px", textAlign: "center", fontFamily: "Karla, sans-serif", fontWeight: "300", fontSize: "2rem" }}
           >
@@ -55,7 +55,7 @@ export default function Hero() {
         className={styles.valuesSection}
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: isVisible ? 0 : 1, y: isVisible ? 50 : 0 }}
-        transition={{ duration: 2.2, ease: "easeInOut" }}
+        transition={{ duration: 1.8, ease: "easeInOut" }}
       >
         <h2 className={styles.valuesTitle}>Nos Valeurs</h2>
         <p className={styles.valuesDescription}>Découvrez notre engagement envers l'énergie durable et responsable.</p>

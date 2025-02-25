@@ -36,12 +36,12 @@ export default function Hero() {
             src="/LOGO-BLANC-TRANSPARANT.png"
             alt="Orku Logo"
             width={300}
-            height={280}
+            height={200}
           />
           <motion.h1
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.8 }}
-            transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
+            transition={{ duration: 2.2, delay: 0.3, ease: "easeOut" }}
             className={styles.heroText}
             style={{ color: "white", marginTop: "-50px", textAlign: "center", fontFamily: "Karla, sans-serif", fontWeight: "bold", fontSize: "2rem" }}
           >
@@ -55,7 +55,7 @@ export default function Hero() {
         className={styles.valuesSection}
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: isVisible ? 0 : 1, y: isVisible ? 50 : 0 }}
-        transition={{ duration: 1.5, ease: "easeInOut" }}
+        transition={{ duration: 2.2, ease: "easeInOut" }}
       >
         <h2 className={styles.valuesTitle}>Nos Valeurs</h2>
         <p className={styles.valuesDescription}>Découvrez notre engagement envers l'énergie durable et responsable.</p>

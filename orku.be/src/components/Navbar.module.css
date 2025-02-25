@@ -1,0 +1,105 @@
+/* Navbar.module.css */
+
+/* Navbar Container */
+.navbar {
+  width: 82%;
+  margin: 0.5rem auto;
+  padding: 0.3rem 0.6rem;
+  /* Further reduced padding for a thinner navbar */
+  background-color: rgba(23, 63, 82, 0.1);
+  border-radius: 30px;
+  /* More compact border radius */
+  position: fixed;
+  top: 5px;
+  /* Adjusted position for a slimmer look */
+  left: 0;
+  right: 0;
+  z-index: 9000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+/* Navbar appears on scroll */
+.navbar.scrolled {
+  opacity: 1;
+  transform: translateY(0);
+  background-color: rgba(23, 63, 82, 0.5);
+
+}
+
+/* Logo */
+.logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Expanding "Own Your Energy" */
+.hoverText {
+  position: absolute;
+  left: 110%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ee7042;
+  font-size: 0.8rem;
+  /* Slightly smaller font size */
+  font-family: 'Karla', sans-serif;
+  font-weight: bold;
+  white-space: nowrap;
+  transform-origin: center;
+  pointer-events: none;
+  z-index: 1001;
+}
+
+/* Navigation Links */
+.navLinks {
+  display: flex;
+  gap: 1.2rem;
+  /* More compact spacing */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navLinks a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  /* Further reduced font size */
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+/* Highlight active section */
+.navLinks a.active {
+  color: #ee7042;
+  font-weight: bold;
+}
+
+/* Hover underline from center */
+.navLinks a::after {
+  content: '';
+  width: 0;
+  height: 2px;
+  background-color: #ee7042;
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.navLinks a:hover::after {
+  width: 100%;
+}
+
+.navLinks a:hover {
+  color: #ee7042;
+}

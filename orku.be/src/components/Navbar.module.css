@@ -140,7 +140,7 @@
     flex-direction: column;
     align-items: center;
     position: absolute;
-    top: 70px;
+    top: 80px;
     /* Décalage pour éviter la superposition */
     right: 10px;
     width: 200px;

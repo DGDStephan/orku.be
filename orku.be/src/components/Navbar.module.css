@@ -3,8 +3,7 @@
   width: 82%;
   margin: 0.5rem auto;
   padding: 0.3rem 0.6rem;
-  background-color: rgba(23, 63, 82, 0.1);
-  /* Transparence identique */
+  background-color: rgba(23, 63, 82, 0);
   border-radius: 30px;
   position: fixed;
   top: 5px;
@@ -18,7 +17,7 @@
   backdrop-filter: blur(6px);
   opacity: 0;
   transform: translateY(-20px);
-  transition: background-color 0.3s ease-in-out, opacity 0.5s ease-in-out;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 /* Navbar apparaît au scroll */
@@ -28,43 +27,49 @@
   background-color: rgba(23, 63, 82, 0.3);
 }
 
-/* Logo Container */
+/* Wrapper pour aligner correctement le logo et le texte */
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Logo Container avec effet pop-up */
 .logoContainer {
   display: flex;
   align-items: center;
   gap: 10px;
-  transition: transform 0.7s ease-in-out;
-}
-
-/* Effet hover sur le logo */
-.logoContainer:hover {
-  transform: scale(1.2);
-}
-
-/* Texte "Own Your Energy" avec effet pop-up */
-.logoText {
-  font-size: 0.9rem;
-  font-family: 'Karla', sans-serif;
-  font-weight: 400;
-  color: #EE7042 !important;
-  background-color: transparent !important;
   opacity: 0;
-  transform: scale(0.5);
-  /* Commence plus petit pour un effet pop-up */
-  transform-origin: center;
-  transition: opacity 0.9s ease-in-out, transform 0.9s ease-in-out;
-  z-index: 1000;
-  position: relative;
+  transform: scale(0);
+  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
 }
 
-/* Affichage au scroll */
-.showText {
+/* Apparition progressive du logo */
+.navbar.scrolled .logoContainer {
   opacity: 1;
   transform: scale(1);
 }
 
-/* Affichage au hover sur le logo */
-.logoContainer:hover .logoText {
+/* Texte "Own Your Energy" avec effet pop-up propre */
+.logoText {
+  font-size: 0.9rem;
+  font-family: 'Karla', sans-serif;
+  font-weight: 400;
+  color: #EE7042;
+  background-color: transparent;
+  opacity: 0;
+  transform: scale(0);
+  transform-origin: center;
+  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+  z-index: 1000;
+  position: absolute;
+  left: 50px;
+  bottom: 8px;
+  white-space: nowrap;
+}
+
+/* Apparition progressive avec effet pop-up */
+.showText {
   opacity: 1;
   transform: scale(1);
 }
@@ -83,17 +88,16 @@
   text-decoration: none;
   font-size: 0.9rem;
   position: relative;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease-in-out;
 }
 
-/* Hover en orange pour la version bureau */
+/* Hover en orange avec soulignement */
 .navLinks a:hover {
-  color: #EE7042 !important;
+  color: #EE7042;
 }
 
-/* Soulignement en hover pour la version bureau */
 .navLinks a::after {
-  content: '';
+  content: "";
   width: 0;
   height: 2px;
   background-color: #EE7042;
@@ -101,30 +105,18 @@
   bottom: -3px;
   left: 50%;
   transform: translateX(-50%);
-  transition: width 0.3s ease;
+  transition: width 0.3s ease-in-out;
 }
 
 .navLinks a:hover::after {
   width: 100%;
 }
 
-/* Menu Mobile */
-.mobileMenu {
-  display: none;
-}
-
-/* Bouton burger */
+/* Bouton menu visible uniquement sur mobile */
 .menuButton {
   display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  right: 20px;
-  top: 15px;
 }
 
-/* Mobile version */
 @media (max-width: 768px) {
   .navLinks {
     display: none;
@@ -132,40 +124,47 @@
 
   .menuButton {
     display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    z-index: 10000;
   }
 
-  /* Menu mobile décalé vers le bas */
+  /* Menu mobile bien aligné et compact */
   .mobileMenu {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute;
-    top: 80px;
-    /* Décalage pour éviter la superposition */
+    position: fixed;
+    top: 70px;
     right: 10px;
-    width: 200px;
+    width: 50%;
+    max-width: 160px;
     background-color: rgba(23, 63, 82, 0.3);
-    /* Transparence identique à la navbar */
     backdrop-filter: blur(6px);
-    /* Effet de flou identique */
-    padding: 1rem;
-    border-radius: 10px;
-    gap: 1rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    padding: 0.6rem;
+    border-radius: 8px;
+    gap: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     z-index: 9999;
   }
 
   /* Mobile Navigation Links */
   .mobileMenu a {
-    color: white !important;
-    text-decoration: none !important;
+    color: white;
+    text-decoration: none;
     font-size: 1rem;
     text-align: center;
     transition: color 0.3s ease;
+    padding: 4px 0;
+    width: 100%;
   }
 
-  /* Hover en orange dans le menu mobile */
+  /* Hover en orange */
   .mobileMenu a:hover {
-    color: #EE7042 !important;
+    color: #EE7042;
   }
 }

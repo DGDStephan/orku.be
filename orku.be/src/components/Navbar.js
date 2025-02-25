@@ -10,49 +10,55 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showText, setShowText] = useState(false);
+  const [showLogo, setShowLogo] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      setShowText(window.scrollY > 100);
 
-      const sections = document.querySelectorAll("section");
-      let currentSection = "";
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (window.scrollY >= sectionTop - sectionHeight / 3) {
-          currentSection = section.getAttribute("id");
-        }
-      });
-      setActiveSection(currentSection);
+      // Active le logo après l'apparition de la navbar
+      if (window.scrollY > 60 && !showLogo) {
+        setShowLogo(true);
+      }
+
+      // Active le texte après l'apparition du logo
+      if (window.scrollY > 100 && !showText) {
+        setShowText(true);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [showLogo, showText]);
 
   return (
     <motion.nav
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: isScrolled ? 1 : 0, y: isScrolled ? 0 : -20 }}
-      transition={{ duration: 1.2 }}
+      transition={{ duration: 1 }}
       className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}
     >
-      {/* Logo Section */}
-      <motion.div
-        className={styles.logoContainer}
-        whileHover={{ scale: 1.2 }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-      >
-        <Image src="/logo-short.png" alt="Orku Logo" width={50} height={50} />
+      <div className={styles.logoWrapper}>
+        {/* Logo avec effet pop-up */}
         <motion.div
-          className={`${styles.logoText} ${showText ? styles.showText : ""}`}
-          style={{ position: "relative", zIndex: 1000 }}
+          className={styles.logoContainer}
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: showLogo ? 1 : 0, scale: showLogo ? 1 : 0 }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+        >
+          <Image src="/logo-short.png" alt="Orku Logo" width={50} height={50} />
+        </motion.div>
+
+        {/* Texte "Own Your Energy" séparé du logo */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: showText ? 1 : 0, scale: showText ? 1 : 0 }}
+          transition={{ duration: 1.5, ease: "easeInOut", delay: 0.2 }}
+          className={styles.logoText}
         >
           Own Your Energy
         </motion.div>
-      </motion.div>
+      </div>
 
       {/* Desktop Navigation */}
       <ul className={styles.navLinks}>
@@ -65,12 +71,12 @@ export default function Navbar() {
         ))}
       </ul>
 
-      {/* Mobile Menu */}
+      {/* Bouton menu uniquement sur mobile */}
       <button className={styles.menuButton} onClick={() => setIsMenuOpen(!isMenuOpen)}>
         {isMenuOpen ? <FiX size={28} color="#fff" /> : <FiMenu size={28} color="#fff" />}
       </button>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className={styles.mobileMenu}>
           {["accueil", "services", "valeurs", "partenaires", "contact"].map((section) => (

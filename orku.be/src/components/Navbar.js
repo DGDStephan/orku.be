@@ -36,7 +36,7 @@ export default function Navbar() {
     <motion.nav
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: isScrolled ? 1 : 0, y: isScrolled ? 0 : -20 }}
-      transition={{ duration: 0.7 }}
+      transition={{ duration: 1.2 }}
       className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}
     >
       {/* Logo Section */}

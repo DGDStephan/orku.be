@@ -41,9 +41,9 @@ export default function Hero() {
           <motion.h1
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.8 }}
-            transition={{ duration: 2.2, delay: 0.3, ease: "easeOut" }}
+            transition={{ duration: 2.2, delay: 0.6, ease: "easeOut" }}
             className={styles.heroText}
-            style={{ color: "white", marginTop: "-50px", textAlign: "center", fontFamily: "Karla, sans-serif", fontWeight: "bold", fontSize: "2rem" }}
+            style={{ color: "white", marginTop: "-40px", textAlign: "center", fontFamily: "Karla, sans-serif", fontWeight: "300", fontSize: "2rem" }}
           >
             Own Your Energy
           </motion.h1>
